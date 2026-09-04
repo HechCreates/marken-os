@@ -157,3 +157,37 @@ kept for reference. `screen references/` holds the original mockups.
 | `npm run build` | Production build |
 | `npm run contrast` | Verify every colour pairing against WCAG AA |
 | `npm run types:gen` | Regenerate database types (needs the Supabase CLI) |
+
+## Deploying
+
+Hosted on Vercel, deploying from `main`.
+
+### 1. Import the repo
+
+At [vercel.com/new](https://vercel.com/new), import `HechCreates/marken-os`.
+Framework, build command and output directory are all detected — leave them
+alone.
+
+### 2. Environment variables
+
+Add these under **Settings → Environment Variables** before the first build:
+
+| Variable | Required | Notes |
+|---|---|---|
+| `NEXT_PUBLIC_SUPABASE_URL` | yes | Your project URL |
+| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | yes | Safe in the browser; RLS is what protects data |
+| `NEXT_PUBLIC_LOGIN_EMAIL_DOMAIN` | yes | Must match `public.username_to_email()` or every login silently fails |
+| `SUPABASE_SERVICE_ROLE_KEY` | no | Only for creating and deleting accounts in Settings. **Bypasses every RLS policy** — never prefix it with `NEXT_PUBLIC_` |
+
+Without the service role key the app runs fine; Settings shows a banner and
+account creation is disabled.
+
+### 3. Supabase redirect URLs
+
+Add the deployed origin under **Authentication → URL Configuration** in
+Supabase, otherwise sessions won't persist on the deployed domain.
+
+### 4. Push to deploy
+
+Every push to `main` triggers a build. Pull requests get preview deployments,
+which share the same Supabase project — so a preview writes to real data.
