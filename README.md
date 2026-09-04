@@ -182,10 +182,15 @@ Add these under **Settings → Environment Variables** before the first build:
 Without the service role key the app runs fine; Settings shows a banner and
 account creation is disabled.
 
-### 3. Supabase redirect URLs
+### 3. Supabase URL configuration — not required
 
-Add the deployed origin under **Authentication → URL Configuration** in
-Supabase, otherwise sessions won't persist on the deployed domain.
+Worth stating because it is easy to assume otherwise: this app signs in with
+`signInWithPassword`, which returns a session directly and writes it to cookies
+server-side. No redirect is involved, so **Site URL and Redirect URLs do not
+need the deployed origin** for login to work.
+
+They would matter the moment magic links, OAuth or email confirmation are
+added — none of which this app uses.
 
 ### 4. Push to deploy
 
