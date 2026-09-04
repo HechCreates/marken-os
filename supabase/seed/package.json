@@ -1,0 +1,9 @@
+{
+  "name": "markenos-seed",
+  "private": true,
+  "type": "module",
+  "description": "Demo data seeder for Marken OS",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0"
+  }
+}

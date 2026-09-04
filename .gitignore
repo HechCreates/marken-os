@@ -1,0 +1,31 @@
+node_modules/
+.next/
+out/
+build/
+next-env.d.ts
+*.tsbuildinfo
+
+# Secrets — never commit
+.env
+.env.local
+.env*.local
+
+# Legacy Framer artefacts, kept locally for reference only
+markeninternaltool.framer.website/
+markeninternaltool.framer.website.zip
+
+# Dead prototype containing three plaintext passwords. Superseded by
+# loginOverride.tsx and never wired up — but git history is forever, so it
+# stays out of the repo.
+MarkenOs overrides/LoginPage.tsx
+
+# Vendored Apple HIG reference docs pulled in as a Claude skill. Not our
+# content to redistribute, and it's tooling rather than the product.
+.claude/skills/
+
+# Local editor/agent config
+.claude/settings.local.json
+.mcp.json
+
+.DS_Store
+*.log
