@@ -52,36 +52,38 @@ export default async function AdminDashboard() {
           </div>
         </section>
 
-        <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_320px]">
-          <section aria-labelledby="domains">
-            <h2
-              id="domains"
-              className="mb-3 text-footnote font-semibold text-label-secondary"
-            >
-              Domains
-            </h2>
-            <div className="grid gap-3 sm:grid-cols-2">
-              {DOMAINS.map((d) => (
-                <DomainCard
-                  key={d}
-                  name={DOMAIN_LABELS[d]}
-                  count={counts[d]}
-                  href={`/d/${d}`}
-                />
-              ))}
-            </div>
-          </section>
+        {/* Domains and activity are stacked, each spanning the full column, so
+            the domain grid lines up with the stat row above it. Two across on
+            anything wider than a phone — with four domains that reads as a
+            2 × 2 block rather than a list. */}
+        <section aria-labelledby="domains" className="mt-8">
+          <h2
+            id="domains"
+            className="mb-3 text-footnote font-semibold text-label-secondary"
+          >
+            Domains
+          </h2>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {DOMAINS.map((d) => (
+              <DomainCard
+                key={d}
+                name={DOMAIN_LABELS[d]}
+                count={counts[d]}
+                href={`/d/${d}`}
+              />
+            ))}
+          </div>
+        </section>
 
-          <section aria-labelledby="activity">
-            <h2
-              id="activity"
-              className="mb-3 text-footnote font-semibold text-label-secondary"
-            >
-              Recent activity
-            </h2>
-            <ActivityFeed items={activity} />
-          </section>
-        </div>
+        <section aria-labelledby="activity" className="mt-8">
+          <h2
+            id="activity"
+            className="mb-3 text-footnote font-semibold text-label-secondary"
+          >
+            Recent activity
+          </h2>
+          <ActivityFeed items={activity} />
+        </section>
       </main>
     </div>
   )
