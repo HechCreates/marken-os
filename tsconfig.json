@@ -39,6 +39,7 @@
     "node_modules",
     "markeninternaltool.framer.website",
     "MarkenOs overrides",
-    "supabase/seed"
+    "supabase/seed",
+    "showreel"
   ]
 }
