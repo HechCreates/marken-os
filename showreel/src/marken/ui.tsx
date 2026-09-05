@@ -149,16 +149,17 @@ export const Card: React.FC<{
 /**
  * A screenshot in window chrome, so it reads as a product shot.
  *
- * Sized by ASPECT, not height. The captures are 1600px wide with content
- * ending around 800–850px, so a ~2:1 frame lands the crop right at the end of
- * the content — a taller frame would include the empty page below it.
- * objectPosition top keeps the nav and headline in every shot.
+ * Sized by ASPECT, not height. The captures are 1600px wide and taller than
+ * the frame, so `posY` chooses which slice of the page shows — 0 is the top of
+ * the capture, 100 the bottom. Feature.tsx animates it, which is what turns a
+ * static screenshot into a slow scroll down the real page.
  */
 export const Shot: React.FC<{
   src: string
   style?: React.CSSProperties
   aspect?: number
-}> = ({ src, style, aspect = 1.97 }) => (
+  posY?: number
+}> = ({ src, style, aspect = 1.97, posY = 0 }) => (
   <div
     style={{
       borderRadius: 18,
@@ -171,8 +172,7 @@ export const Shot: React.FC<{
     }}
   >
     {/* height:100% as well as width, or cover has nothing to crop against and
-        a tall capture letterboxes inside its own frame. Top-anchored so the
-        nav and headline always survive the crop. */}
+        a tall capture letterboxes inside its own frame. */}
     <img
       src={src}
       alt=""
@@ -181,7 +181,37 @@ export const Shot: React.FC<{
         width: "100%",
         height: "100%",
         objectFit: "cover",
-        objectPosition: "top center",
+        objectPosition: `center ${posY}%`,
+      }}
+    />
+  </div>
+)
+
+/**
+ * A hairline across the bottom of every frame showing how far through the film
+ * you are. In a two-and-a-half-minute explainer that orientation is worth four
+ * pixels — it is why nobody has to wonder how much is left.
+ */
+export const Progress: React.FC<{ frame: number; total: number }> = ({
+  frame,
+  total,
+}) => (
+  <div
+    style={{
+      position: "absolute",
+      left: 0,
+      right: 0,
+      bottom: 0,
+      height: 4,
+      background: "rgba(255,255,255,0.07)",
+    }}
+  >
+    <div
+      style={{
+        height: "100%",
+        width: `${Math.min(1, frame / total) * 100}%`,
+        background: C.accent,
+        opacity: 0.5,
       }}
     />
   </div>
