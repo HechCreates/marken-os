@@ -1,9 +1,10 @@
 import Link from "next/link"
-import { ChevronLeft, Clock } from "lucide-react"
+import { ChevronLeft, Clock, LogOut } from "lucide-react"
 import { requireProfile } from "@/lib/auth"
 import { createClient } from "@/lib/supabase/server"
 import { AppNav } from "@/components/app-nav"
 import { ProfilePanel, PasswordPanel } from "@/components/account/account-panels"
+import { signOut } from "@/app/login/actions"
 import { getAccountStats, getUnreadCount } from "@/lib/queries"
 import { DOMAIN_LABELS, ROLE_LABELS, homePathFor } from "@/lib/constants"
 import type { Domain } from "@/types/database"
@@ -73,6 +74,30 @@ export default async function AccountPage() {
         <div className="mt-4 flex flex-col gap-4">
           <ProfilePanel profile={profile} avatarUrl={avatarUrl} />
           <PasswordPanel />
+
+          {/* Signing out is the only thing that writes clock_out, so it says so
+              — otherwise closing the tab looks equivalent, and it isn't. */}
+          <section className="rounded-card border border-separator bg-card p-5 shadow-card">
+            <h2 className="mb-4 text-caption font-bold uppercase tracking-wide text-label-tertiary">
+              Session
+            </h2>
+            <div className="flex flex-wrap items-center justify-between gap-4">
+              <p className="max-w-[46ch] text-footnote text-label-secondary">
+                {stats.clockedInAt
+                  ? "Signing out clocks you out and records your hours. Closing the tab doesn't."
+                  : "You're not currently clocked in. Signing in again starts a new session."}
+              </p>
+              <form action={signOut}>
+                <button
+                  type="submit"
+                  className="inline-flex h-11 items-center gap-2 rounded-control border border-status-changes/40 px-5 text-footnote font-bold text-status-changes transition-colors hover:bg-status-changes-soft"
+                >
+                  <LogOut size={15} strokeWidth={2.2} aria-hidden="true" />
+                  Sign out
+                </button>
+              </form>
+            </div>
+          </section>
         </div>
       </main>
     </div>

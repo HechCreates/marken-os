@@ -1,5 +1,6 @@
 import Link from "next/link"
-import { Bell, CircleUserRound, Settings } from "lucide-react"
+import { Bell, CircleUserRound, Settings, LogOut } from "lucide-react"
+import { signOut } from "@/app/login/actions"
 import type { Profile } from "@/types/database"
 
 /**
@@ -54,6 +55,23 @@ export function AppNav({
               <Settings size={19} strokeWidth={1.75} aria-hidden="true" />
             </IconLink>
           )}
+
+          {/* Separated by a rule and a gap: signing out also clocks you out,
+              so it must not sit flush against the icons people tap all day. */}
+          <span
+            aria-hidden="true"
+            className="mx-1.5 h-5 w-px bg-glass-line"
+          />
+          <form action={signOut}>
+            <button
+              type="submit"
+              title="Sign out"
+              aria-label="Sign out"
+              className="grid size-9 place-items-center rounded-control text-label-secondary transition-colors hover:bg-status-changes-soft hover:text-status-changes"
+            >
+              <LogOut size={18} strokeWidth={1.75} aria-hidden="true" />
+            </button>
+          </form>
         </nav>
       </div>
     </header>
