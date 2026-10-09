@@ -6,6 +6,22 @@ a review pipeline, with three roles, four domains, attendance and notifications.
 Built with Next.js 16 and Supabase. Authorization lives in the database, not the
 browser.
 
+![Admin dashboard](docs/screenshots/admin.png)
+
+## Try it live
+
+**[marken-os.vercel.app](https://marken-os.vercel.app)** runs on seeded demo
+data: no real clients, no real people. Sign in as each role to watch the same
+screens return different rows.
+
+| Role | Username |
+|---|---|
+| Admin | `rohan.admin` |
+| Domain heads | `jane.marketing` · `nina.design` · `tom.social` · `dev.webdev` |
+| Employees | `liam.marketing` · `carlos.design` · `mia.social` · `ryan.webdev` |
+
+Password for every account: **`paparatzi_1810`**
+
 ---
 
 ## What it does
@@ -30,6 +46,15 @@ Three roles see three different applications:
 
 Employees also see the pipeline in their own vocabulary — *Sent for approval*
 rather than `in_review`, *Rework* rather than `changes_requested`.
+
+| Domain head | Employee |
+|---|---|
+| ![Domain head dashboard](docs/screenshots/domain.png) | ![Employee dashboard](docs/screenshots/employee.png) |
+
+The project page, where the work happens: brief, role-gated actions, versioned
+submissions and an audit-style thread.
+
+![Project page](docs/screenshots/project.png)
 
 ## Stack
 
@@ -143,11 +168,6 @@ function mirrored on both sides — `usernameToEmail()` in the app and
 `public.username_to_email()` in the database. The trade-off: those addresses
 receive no mail, so password resets are an admin action rather than a
 self-service email link.
-
-## Notes
-
-`MarkenOs overrides/` holds the original Framer code overrides this replaced,
-kept for reference. `screen references/` holds the original mockups.
 
 ## Scripts
 

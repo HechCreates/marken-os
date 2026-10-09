@@ -14,10 +14,18 @@ next-env.d.ts
 markeninternaltool.framer.website/
 markeninternaltool.framer.website.zip
 
-# Dead prototype containing three plaintext passwords. Superseded by
-# loginOverride.tsx and never wired up — but git history is forever, so it
-# stays out of the repo.
-MarkenOs overrides/LoginPage.tsx
+# Working files kept locally, out of the public repo: the original Framer
+# overrides (one of which held plaintext passwords), mockups, portfolio
+# assets and the Remotion showreel source.
+MarkenOs overrides/
+screen references/
+portfolio assets/
+showreel/
+
+# AI agent config
+CLAUDE.md
+AGENTS.md
+.claude/
 
 # Vendored Apple HIG reference docs pulled in as a Claude skill. Not our
 # content to redistribute, and it's tooling rather than the product.
