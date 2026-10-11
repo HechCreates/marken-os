@@ -93,9 +93,7 @@ export const EMPLOYEE_STATUS_LABELS: Record<ProjectStatus, string> = {
  * three roles without one being handed to them. Kept in the same order as the
  * seed — if STAFF there changes, change it here too.
  *
- * They all share one password, which the seed takes from DEMO_PASSWORD at the
- * time it runs. Nothing records it afterwards, so the app reads it from the
- * environment: unset, the login page simply doesn't offer the accounts.
+ * They all share one password — the one the seed was run with.
  */
 export const DEMO_ACCOUNTS: {
   username: string
@@ -114,5 +112,8 @@ export const DEMO_ACCOUNTS: {
   { username: "ryan.webdev",    name: "Ryan Patel",    role: "employee", domain: "webdev" },
 ]
 
-/** Read statically so Next can inline it into the client bundle. */
-export const DEMO_PASSWORD = process.env.NEXT_PUBLIC_DEMO_PASSWORD ?? ""
+/**
+ * Not a secret worth hiding: the login page prints it, so it is public the
+ * moment the page loads. Keep it here, next to the accounts it opens.
+ */
+export const DEMO_PASSWORD = "paparatzi_1810"
