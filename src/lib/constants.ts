@@ -87,3 +87,32 @@ export const EMPLOYEE_STATUS_LABELS: Record<ProjectStatus, string> = {
   changes_requested: "Rework",
   approved: "Completed",
 }
+
+/**
+ * The nine accounts `supabase/seed/seed.mjs` creates, so a visitor can try the
+ * three roles without one being handed to them. Kept in the same order as the
+ * seed — if STAFF there changes, change it here too.
+ *
+ * They all share one password, which the seed takes from DEMO_PASSWORD at the
+ * time it runs. Nothing records it afterwards, so the app reads it from the
+ * environment: unset, the login page simply doesn't offer the accounts.
+ */
+export const DEMO_ACCOUNTS: {
+  username: string
+  name: string
+  role: Role
+  domain: Domain | null
+}[] = [
+  { username: "rohan.admin",    name: "Rohan Bhat",    role: "admin",    domain: null },
+  { username: "jane.marketing", name: "Jane Doe",      role: "head",     domain: "marketing" },
+  { username: "nina.design",    name: "Nina Rao",      role: "head",     domain: "design" },
+  { username: "tom.social",     name: "Tom Fisher",    role: "head",     domain: "socialmedia" },
+  { username: "dev.webdev",     name: "Dev Sharma",    role: "head",     domain: "webdev" },
+  { username: "liam.marketing", name: "Liam Carter",   role: "employee", domain: "marketing" },
+  { username: "carlos.design",  name: "Carlos Mendez", role: "employee", domain: "design" },
+  { username: "mia.social",     name: "Mia Chen",      role: "employee", domain: "socialmedia" },
+  { username: "ryan.webdev",    name: "Ryan Patel",    role: "employee", domain: "webdev" },
+]
+
+/** Read statically so Next can inline it into the client bundle. */
+export const DEMO_PASSWORD = process.env.NEXT_PUBLIC_DEMO_PASSWORD ?? ""

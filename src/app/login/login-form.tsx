@@ -4,6 +4,7 @@ import { useActionState, useId, useState } from "react"
 import { useSearchParams } from "next/navigation"
 import { Eye, EyeOff, CircleAlert, LoaderCircle } from "lucide-react"
 import { signIn, type LoginState } from "./actions"
+import DemoAccounts from "./demo-accounts"
 
 // HIG Writing: "avoid blame, and be clear about what someone can do to fix it."
 const ERRORS: Record<string, string> = {
@@ -168,6 +169,8 @@ export default function LoginForm() {
             {pending ? "Signing in…" : "Sign in"}
           </button>
         </form>
+
+        <DemoAccounts />
 
         <p className="mt-5 text-center text-footnote text-label-tertiary">
           Forgotten your password? Ask a domain head or admin to reset it.
